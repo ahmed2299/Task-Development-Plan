@@ -1,0 +1,41 @@
+<!-- Navigation Bar - Fixed Position -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNavbar">
+  <div class="container">
+    <!-- Brand/Logo -->
+    <a class="navbar-brand fw-bold" routerLink="/home">
+      <i class="fas fa-home me-2"></i>TDP
+    </a>
+    <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active" *ngIf="isLoggedIn()">
+      <i class="fas fa-user-circle me-1"></i>{{ 'nav.profile' | translate }}
+    </a>
+
+    
+    <!-- Language Switcher -->
+    <app-language-switcher></app-language-switcher>
+    
+    <!-- Navigation Links -->
+    <div class="navbar-nav ms-auto">
+      <!-- Public Navigation (when not logged in) -->
+      <a class="nav-link px-3" routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn()">
+        <i class="fas fa-sign-in-alt me-1"></i>{{ 'nav.login' | translate }}
+      </a>
+      <a class="nav-link px-3" routerLink="/register" routerLinkActive="active" *ngIf="!isLoggedIn()">
+        <i class="fas fa-user-plus me-1"></i>{{ 'nav.register' | translate }}
+      </a>
+
+      
+      <!-- Logout Button -->
+      <button class="btn btn-outline-light btn-sm ms-3" (click)="logout()" *ngIf="isLoggedIn()">
+        <i class="fas fa-sign-out-alt me-1"></i>{{ 'nav.logout' | translate }}
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer to prevent content from hiding under navbar -->
+<div style="height: 80px;"></div>
+
+<!-- Main Content Area -->
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,94 @@
+<!-- Registration Form -->
+<div class="row mt-4">
+  <div class="col-md-8 mx-auto">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-user-plus me-2"></i>{{ 'register.userRegistration' | translate }}
+          <div class="float-end">
+            <span class="badge bg-light text-dark me-2" *ngIf="isLoggedIn()">
+              <i class="fas fa-user me-1"></i>{{ 'register.loggedIn' | translate }}
+            </span>
+            <button type="button" class="btn btn-outline-light btn-sm" (click)="logout()" *ngIf="isLoggedIn()">
+              <i class="fas fa-sign-out-alt me-1"></i>{{ 'nav.logout' | translate }}
+            </button>
+          </div>
+        </h5>
+      </div>
+      <div class="card-body">
+        <!-- Dummy Data Button -->
+        <div class="mb-3">
+          <button type="button" class="btn btn-outline-secondary" (click)="fillDummyData()">
+            <i class="fas fa-magic me-2"></i>{{ 'register.fillDummyData' | translate }}
+          </button>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="name" class="form-label">{{ 'register.fullName' | translate }}</label>
+                <input type="text" class="form-control" id="name" formControlName="name" [placeholder]="'register.enterFullName' | translate">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">{{ 'form.email' | translate }}</label>
+                <input type="email" class="form-control" id="email" formControlName="email" [placeholder]="'register.enterEmail' | translate">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="password" class="form-label">{{ 'form.password' | translate }}</label>
+                <input type="password" class="form-control" id="password" formControlName="password"
+                  [placeholder]="'register.enterPassword' | translate">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="birthDate" class="form-label">{{ 'profile.birthDate' | translate }}</label>
+                <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="departmentID" class="form-label">{{ 'register.departmentId' | translate }}</label>
+            <input type="number" class="form-control" id="departmentID" formControlName="departmentID"
+              [placeholder]="'enterDepartmentId' | translate">
+            <small class="form-text text-muted">{{ 'register.departmentIdHelp' | translate }}</small>
+          </div>
+
+          <div class="row btn-row">
+            <div class="col-md-6">
+              <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting">
+                <span *ngIf="!isSubmitting">{{ 'register.register' | translate }}</span>
+                <span *ngIf="isSubmitting"><i class="fas fa-spinner fa-spin me-2"></i>{{ 'register.registering' | translate }}</span>
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-outline-secondary w-100" (click)="goToLogin()">
+                <i class="fas fa-arrow-left me-2"></i>{{ 'register.backToLogin' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Success Message -->
+        <div class="alert alert-success mt-3" *ngIf="registerSuccess">
+          <i class="fas fa-check-circle me-2"></i>{{ 'register.registrationSuccessful' | translate }}
+        </div>
+
+        <!-- Error Message -->
+        <div class="alert alert-danger mt-3" *ngIf="registerError">
+          <i class="fas fa-exclamation-triangle me-2"></i>{{ registerError }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

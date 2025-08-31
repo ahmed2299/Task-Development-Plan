@@ -1,0 +1,73 @@
+<!-- Login Form -->
+<div class="row mt-4">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h5 class="card-title mb-0"><i class="fas fa-sign-in-alt me-2"></i>{{ 'page.login.title' | translate }}</h5>
+      </div>
+      <div class="card-body">
+        <!-- Dummy Data Button -->
+        <div class="mb-3">
+          <button type="button" class="btn btn-outline-secondary" (click)="fillDummyData()">
+            <i class="fas fa-magic me-2"></i>Fill Dummy Data for Testing
+          </button>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="mb-3">
+            <label for="email" class="form-label">{{ 'form.email' | translate }}</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              formControlName="email"
+              [placeholder]="'form.email' | translate"
+              [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <div class="invalid-feedback" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              <span *ngIf="loginForm.get('email')?.errors?.['required']">{{ 'form.required' | translate }}</span>
+              <span *ngIf="loginForm.get('email')?.errors?.['email']">{{ 'form.invalidEmail' | translate }}</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="password" class="form-label">{{ 'form.password' | translate }}</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password" 
+              formControlName="password"
+              [placeholder]="'form.password' | translate"
+              [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              <span *ngIf="loginForm.get('password')?.errors?.['required']">{{ 'form.required' | translate }}</span>
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength']">{{ 'form.minLength' | translate: [6] }}</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-success w-100 mb-3" [disabled]="isSubmitting || loginForm.invalid">
+            <span *ngIf="!isSubmitting">{{ 'button.login' | translate }}</span>
+            <span *ngIf="isSubmitting"><i class="fas fa-spinner fa-spin me-2"></i>{{ 'common.loading' | translate }}</span>
+          </button>
+
+          <!-- Register Link -->
+          <div class="text-center">
+            <p class="mb-0">Don't have an account?</p>
+            <button type="button" class="btn btn-link" (click)="goToRegister()">
+              <i class="fas fa-user-plus me-2"></i>{{ 'button.register' | translate }}
+            </button>
+          </div>
+        </form>
+        
+        <!-- Success Message -->
+        <div class="alert alert-success mt-3" *ngIf="loginSuccess">
+          <i class="fas fa-check-circle me-2"></i>{{ 'message.loginSuccess' | translate }}
+        </div>
+
+        <!-- Error Message -->
+        <div class="alert alert-danger mt-3" *ngIf="loginError">
+          <i class="fas fa-exclamation-triangle me-2"></i>{{ loginError }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
