@@ -17,7 +17,7 @@ A modern, enterprise-grade full-stack web application built with .NET 8 Web API 
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
-- [API Documentation](#api-documentation)
+- [API Documentation](#api-documentation) 
 - [Database Schema](#database-schema)
 - [Security Features](#security-features)
 - [Development Workflow](#development-workflow)
